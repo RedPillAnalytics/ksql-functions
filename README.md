@@ -1,7 +1,7 @@
 # KSQL User Define Functions
 This is a rewrite of the `multiply` KSQL user-defined function (UDF) from the Confluent documentation using Groovy with a Gradle-based build process.
 
-Notice that [the multiply function](src/main/groovy/Multiply.groovy) written in Groovy only has three methods, while the [java equivalent](https://docs.confluent.io/current/ksql/docs/udf.html#example-udf-class) (from the Confluent documentation) requires four methods. This all has to do with Java primitives and NULL values, which the [Confluent documentation](https://docs.confluent.io/current/ksql/docs/udf.html#null-handling) does a really good job of explaining. So what's up?
+Notice that [the multiply function](src/main/groovy/Multiply.groovy) written in Groovy only has three methods, while the [Java equivalent](https://docs.confluent.io/current/ksql/docs/udf.html#example-udf-class) (from the Confluent documentation) requires four methods. This all has to do with Java primitives and NULL values, which the [Confluent documentation](https://docs.confluent.io/current/ksql/docs/udf.html#null-handling) does a really good job of explaining. So what's up?
 
 We can use Groovy to compile Java libraries, but it goes about things just a little bit different. While Groovy accepts Java primitives (using `long` instead of `Long`, for instance), [Groovy "autowraps" them](https://stackoverflow.com/questions/37055883/explain-groovy-docs-on-autowrapping-primitives-and-wrappers) in the full Object class. So long story short... there is no reason to write separate overloaded methods for primitives versus objects in Groovy. Nice, right?
 
