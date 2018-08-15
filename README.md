@@ -6,7 +6,7 @@ Notice that [the multiply function](src/main/groovy/Multiply.groovy) written in 
 We can use Groovy to compile Java libraries, but it goes about things just a little bit different. While Groovy accepts Java primitives (using `long` instead of `Long`, for instance), [Groovy "autowraps" them](https://stackoverflow.com/questions/37055883/explain-groovy-docs-on-autowrapping-primitives-and-wrappers) in the full Object class. So long story short... there is no reason to write separate overloaded methods for primitives versus objects in Groovy. Nice, right?
 
 ### Shadow Plugin
-One requirement of KSQL UDF JARs is that they contain all external dependencies. This sample does not contain any external dependencies, but if it did, they would be included in the JAR file because we are using the [Shadow Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow). So, to get our "uber-jar", instead of:
+One requirement of KSQL UDF JARs is that they contain all external dependencies. This sample does not contain any external dependencies, but if it did, they would be included in the JAR file because we are using the [Shadow Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow). So, to get our _uber jar_, instead of:
 
 `./gradlew build`
 
