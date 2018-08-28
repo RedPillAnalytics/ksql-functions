@@ -1,20 +1,28 @@
 import io.confluent.ksql.function.udf.*
+import groovy.json.*
 
-@UdfDescription(name = "multiply", description = "multiplies 2 numbers")
-class Multiply {
+@UdfDescription(name = "LPNS", description = "Get LPNS")
+class LPNS {
 
-   @Udf(description = "multiply two non-nullable INTs.")
-   public long multiply(final int v1, final int v2) {
-      return v1 * v2;
-   }
-
-   @Udf(description = "multiply two nullable BIGINTs. If either param is null, null is returned.")
-   public long multiply(final long v1, final long v2) {
-      return v1 == null || v2 == null ? null : v1 * v2;
-   }
-
-   @Udf(description = "multiply two non-nullable DOUBLEs.")
-   public double multiply(final double v1, double v2) {
-      return v1 * v2;
-   }
+   @Udf(description = "Get LPNS")
+   public long getLPNS() {
+        def post = new URL("https://mocksvc.mulesoft.com/mocks/74eea8f3-d287-473b-b452-3461a042201b/license-plate-numbers/?number-of-lpns=1").openConnection();
+        def message = ''
+        post.setRequestMethod("POST")
+        post.setDoOutput(true)
+        post.setRequestProperty("Content-Type", "application/json")
+        post.getOutputStream().write(message.getBytes("UTF-8"));
+        def postRC = post.getResponseCode();
+        //println(postRC);
+        if(postRC.equals(200)) {
+            def result = post.getInputStream().getText();
+            def jsonSlurper = new JsonSlurper()
+            def object = jsonSlurper.parseText(result);
+            println(object.lpns[0]);
+            return object.lpns[0];
+        }
+        else {
+            return -1;
+        }
+    }
 }

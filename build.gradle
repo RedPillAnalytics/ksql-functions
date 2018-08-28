@@ -23,15 +23,7 @@ allprojects {
 }
 
 // configure the upload to GitHub releases
-github {
 
-   token = githubToken
-   owner = 'RedPillAnalytics'
-   repo = 'gradle-plugins'
-   tagName = "v${version}"
-   assets = fileTree(dir: buildDir, includes: ["**/*${version}*", "**/*${version}*.jar"]).toList()
-
-}
 
 dependencies {
 
